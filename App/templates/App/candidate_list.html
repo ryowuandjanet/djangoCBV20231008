@@ -35,6 +35,48 @@
             </tr>
             {% endfor %}
         </table>
+        <!-- Pagination -->
+        <nav>
+            {% if page_obj.has_other_pages %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-outline-secondary mb-4" style="border-radius: 1px; border: 1px solid #d3d3d3;">Fisrt</a>
+                <li class="page-item">
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled"></li>
+                {% endif %}
+
+                {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                <li class="page-item active">
+                    <span class="page-link">
+                        {{ i }}<span class="sr-only"></span>
+                    </span>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-link">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-secondary mb-4" style="border-radius: 1px; border: 1px solid #d3d3d3;">Last</a>
+                {% else %}
+                <li class="page-item disabled"></li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </nav>
         <!-- Messages from backend (Method 2 -SWEETALERT JS) -->
         {% for message in messages %}
             {% if message.tags == 'success' %}

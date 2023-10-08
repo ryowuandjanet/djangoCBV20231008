@@ -15,6 +15,7 @@ class Create(SuccessMessageMixin, CreateView):
 class Read(ListView):
     model = Candidate
     queryset = Candidate.objects.all()
+    paginate_by = 3
 
 # (U) Upate
 class Update(SuccessMessageMixin, UpdateView):
