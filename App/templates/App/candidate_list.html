@@ -35,6 +35,18 @@
             </tr>
             {% endfor %}
         </table>
-        
+        <!-- Messages from backend (Method 2 -SWEETALERT JS) -->
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                Swal.fire({
+                  title: "Perfect !",
+                  text: "{{ message }}",
+                  icon: "success",
+                });
+              </script>
+            {% endif %}
+        {% endfor %}
     </div>
 {% endblock content %}
