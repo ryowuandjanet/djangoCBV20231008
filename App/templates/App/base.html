@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 5.2.3 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- FontAwesome 6.4.2 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Favicon -->
+    <link rel="stylesheet" href="{% static 'img/favicon.ico' %}">
+    <!-- Static CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navbar -->_list
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark navbar {% block navbar %}{% endblock navbar %}">
+                <a href="#" class="navbar-brand flex-grow-1 text-center">
+                    {% block nav-content %}
+                    <i class="fas fa-user friends"></i>&nbsp;&nbsp;LIST OF CANDIATES
+                    {% endblock nav-content %}
+                </a>
+            </nav>
+        </header>
+        <!-- ======= Block Content (ROOT) ====== -->
+        {% block content %}{% endblock content %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-lg-start" id="footer" style="color: #fff;">
+        <div class="text-center p-3" style="background-color: rgba(0,0,0,0.2);">
+            &copy; {% now "Y" %} Copyright:
+            <a href="#" class="text-light" style="text-decoration: none;">
+                <span {% block footer %} style="color: #89cff0;"{% endblock footer %}>www.ryowuandjanet.com</span>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5.2.3 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
