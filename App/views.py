@@ -1,8 +1,11 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from App.models import Candidate
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.db.models import Q
 
 # (C) Create
 class Create(SuccessMessageMixin, CreateView):
@@ -16,6 +19,16 @@ class Read(ListView):
     model = Candidate
     queryset = Candidate.objects.all()
     paginate_by = 3
+    def get_queryset(self) -> QuerySet[Any]:
+        q=self.request.GET.get('q')
+        if q:
+            object_list = self.model.objects.filter(
+                Q(name__icontains=q) | Q(phone__icontains=q) | Q(email__icontains=q) |
+                Q(gender__icontains=q) | Q(career__icontains=q)
+            )
+        else:
+            object_list = self.model.objects.all()
+        return object_list
 
 # (U) Upate
 class Update(SuccessMessageMixin, UpdateView):
