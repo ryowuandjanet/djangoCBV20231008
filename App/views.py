@@ -19,8 +19,10 @@ class Read(ListView):
     model = Candidate
     queryset = Candidate.objects.all()
     paginate_by = 3
-    def get_queryset(self) -> QuerySet[Any]:
-        q=self.request.GET.get('q')
+    def get_queryset(self):
+        q = self.request.GET.get('q')
+        sort_by = self.request.GET.get('sort_by')  # Get the sort parameter from the URL
+
         if q:
             object_list = self.model.objects.filter(
                 Q(name__icontains=q) | Q(phone__icontains=q) | Q(email__icontains=q) |
@@ -28,6 +30,13 @@ class Read(ListView):
             )
         else:
             object_list = self.model.objects.all()
+
+        # Add sorting logic based on 'sort_by' parameter
+        if sort_by == 'name_asc':
+            object_list = object_list.order_by('name')
+        elif sort_by == 'name_desc':
+            object_list = object_list.order_by('-name')
+
         return object_list
 
 # (U) Upate
